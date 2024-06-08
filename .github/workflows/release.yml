@@ -1,18 +1,21 @@
 name: Release with goreleaser
-on:
-  push:
-    tags:
-      - v*.*
+
+on: workflow_dispatch
+# on:
+#   push:
+#     tags:
+#       - v*.*
+
 jobs:
   goreleaser:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: Unshallow Fetch
-        run:  git fetch --prune --unshallow
+        run: git fetch --prune --unshallow
       - uses: actions/setup-go@v2
         with:
-          go-version: '^1.16'
+          go-version: "^1.16"
       - name: Release via goreleaser
         uses: goreleaser/goreleaser-action@master
         with:
